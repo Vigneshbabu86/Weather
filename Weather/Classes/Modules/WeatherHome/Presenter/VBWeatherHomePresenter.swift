@@ -19,6 +19,9 @@ protocol VBWeatherHomePresenterOutput: class {
 
 class VBWeatherHomePresenter: NSObject, VBWeatherHomeInteractorOutput {
     
+    weak var output: VBWeatherHomePresenterOutput!
+    fileprivate var weatherParser = VBWeatherHomeParser()
+    
     // MARK: VBWeatherHomeInteractorOutput
     internal func weatherDataRequestComplete(_ dataDictionary: NSDictionary, error: NSError?) {
         
@@ -27,9 +30,4 @@ class VBWeatherHomePresenter: NSObject, VBWeatherHomeInteractorOutput {
     internal func weatherDataRequestFailed(_ title: String?, errorMsg: String!) {
         
     }
-
-
-	weak var output: VBWeatherHomePresenterOutput!
-	fileprivate var weatherParser = VBWeatherHomeParser()
-
 }

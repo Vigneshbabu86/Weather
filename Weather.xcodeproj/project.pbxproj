@@ -10,6 +10,7 @@
 		183B205C1E7088F700BEDA2F /* VBWeatherUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B205B1E7088F700BEDA2F /* VBWeatherUtilities.swift */; };
 		183B20601E70893800BEDA2F /* VBWeatherBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B205F1E70893800BEDA2F /* VBWeatherBaseViewController.swift */; };
 		183B20621E708A0E00BEDA2F /* VBWeatherConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B20611E708A0E00BEDA2F /* VBWeatherConstant.swift */; };
+		1861DF331E709F6000068912 /* VBWeatherWebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861DF321E709F6000068912 /* VBWeatherWebServiceManager.swift */; };
 		18891E471E6FC66600D58CD8 /* WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E461E6FC66600D58CD8 /* WeatherTests.swift */; };
 		18891E521E6FC66600D58CD8 /* WeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E511E6FC66600D58CD8 /* WeatherUITests.swift */; };
 		18891E671E6FEA6E00D58CD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18891E601E6FEA6E00D58CD8 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		183B205B1E7088F700BEDA2F /* VBWeatherUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherUtilities.swift; sourceTree = "<group>"; };
 		183B205F1E70893800BEDA2F /* VBWeatherBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherBaseViewController.swift; sourceTree = "<group>"; };
 		183B20611E708A0E00BEDA2F /* VBWeatherConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherConstant.swift; sourceTree = "<group>"; };
+		1861DF321E709F6000068912 /* VBWeatherWebServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherWebServiceManager.swift; sourceTree = "<group>"; };
 		18891E2B1E6FC66500D58CD8 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18891E3D1E6FC66500D58CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18891E421E6FC66500D58CD8 /* WeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,14 @@
 				183B205F1E70893800BEDA2F /* VBWeatherBaseViewController.swift */,
 			);
 			path = BaseViewController;
+			sourceTree = "<group>";
+		};
+		1861DF311E709F3900068912 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1861DF321E709F6000068912 /* VBWeatherWebServiceManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		18891E221E6FC66500D58CD8 = {
@@ -196,6 +206,7 @@
 		18891E6E1E6FEA7500D58CD8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1861DF311E709F3900068912 /* Managers */,
 				183B205D1E70893800BEDA2F /* Base */,
 				18891E6F1E6FEA7500D58CD8 /* Constants */,
 				18891E701E6FEA7500D58CD8 /* Utilities */,
@@ -463,6 +474,7 @@
 				18891E8C1E6FEA7500D58CD8 /* VBWeatherHomeRouter.swift in Sources */,
 				18891E6A1E6FEA6E00D58CD8 /* Weather.xcdatamodeld in Sources */,
 				18891E861E6FEA7500D58CD8 /* VBWeatherHomeConfigurator.swift in Sources */,
+				1861DF331E709F6000068912 /* VBWeatherWebServiceManager.swift in Sources */,
 				183B205C1E7088F700BEDA2F /* VBWeatherUtilities.swift in Sources */,
 				183B20601E70893800BEDA2F /* VBWeatherBaseViewController.swift in Sources */,
 				18891E851E6FEA7500D58CD8 /* Reachability.swift in Sources */,

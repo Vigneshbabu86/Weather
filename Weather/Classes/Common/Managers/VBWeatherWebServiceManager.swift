@@ -1,7 +1,7 @@
 /**
  * @author Vignesh Babu
  *
- * @brief
+ * @brief Web Service Manager to manage the service requests
  *
  * @version 1.0
  *
@@ -9,14 +9,3 @@
  */
 
 import Foundation
-
-///
-class VBWeatherHomeParser: NSObject {
-
-    func parserWeatherMapData(_ dataDictionary: NSDictionary) {
-
-        
-    }
-}
-
-

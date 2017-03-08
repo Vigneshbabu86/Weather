@@ -26,10 +26,7 @@ open class Reachability {
 		zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
 		zeroAddress.sin_family = sa_family_t(AF_INET)
         
-        
-        
 		var isConnectionTypeCellular: Bool = false
-        
         
         guard let defaultRouteReachability = withUnsafePointer(to: &zeroAddress, {
             $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {

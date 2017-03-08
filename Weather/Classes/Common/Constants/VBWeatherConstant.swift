@@ -9,3 +9,18 @@
  */
 
 import Foundation
+
+struct VBWeatherConstant {
+    struct openWeatherMap {
+        struct openWeatherMapKeys {
+            static let openWeatherMapApiKey = "57458ef17470dcbfbcbd98dfc247ec2b"
+        }
+        struct openWeatherMapParmeterKeys {
+            static let openWeatherMapAppIdParameterKey = "appid"
+            static let openWeatherMapQueryByCityNameParameterKey = "q"
+        }
+        struct openWeatherMapURL {
+            static let openWeatherMapURL = "api.openweathermap.org/data/2.5/weather"
+        }
+    }
+}
