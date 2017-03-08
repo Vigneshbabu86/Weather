@@ -59,5 +59,4 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, VBWeatherHomePre
     internal func hideActivityIndicator() {
         
     }
-    
 }
