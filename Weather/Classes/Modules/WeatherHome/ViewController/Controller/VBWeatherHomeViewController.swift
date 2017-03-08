@@ -45,13 +45,20 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, VBWeatherHomePre
         super.awakeFromNib()
         VBWeatherHomeConfigurator.sharedInstance.configure(self)
     }
-    
-    // MARK: VBWeatherHomePresenterOutput
-    internal func updateViewBasedOnLoginSuccess(_ weatherMap: VBWeatherMap) {
+}
+
+// MARK: VBWeatherHomePresenterOutput
+typealias WeatherPresenter = VBWeatherHomeViewController
+extension WeatherPresenter {
+    internal func updateViewBasedOnWeatherRequestSuccess(_ weatherMap: VBWeatherMap) {
         
     }
     
-    internal func updateViewBasedOnLoginFailed(_ title: String?, errorMsg: String!) {
+    internal func updateViewBasedOnWeatherRequestFailed(_ title: String?, errorMsg: String!) {
+        
+    }
+    
+    internal func updateViewBasedOnCityTextEntry(_ isSuccess: Bool, errorMsg: String?, cityName: String!) {
         
     }
     
