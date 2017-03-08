@@ -20,6 +20,25 @@ protocol VBWeatherHomeWorkerOutput: class {
 ///
 class VBWeatherHomeWorker: NSObject {
     
+    weak var delegate: VBWeatherHomeWorkerOutput?
+    
+    func handleWeatherRequest(_ cityName: String){
+        if VBWeatherUtilities.isConnectedToNetwork() {
+            let baseURl =  VBWeatherConstant.openWeatherMap.openWeatherMapURLs.openWeatherMapURL
+            let endPointURL = baseURl + "?" + VBWeatherConstant.openWeatherMap.openWeatherMapParmeterKeys.openWeatherMapQueryByCityNameParameterKey + "=" + cityName + "&" + VBWeatherConstant.openWeatherMap.openWeatherMapParmeterKeys.openWeatherMapAppIdParameterKey + "=" + VBWeatherConstant.openWeatherMap.openWeatherMapKeys.openWeatherMapApiKey
+            VBWeatherWebServiceManager.GETRequest(endPointURL, completionHandler: { (responseObject, error) in
+                if let jsonResponse = responseObject as? NSDictionary {
+                    self.delegate?.weatherResults(jsonResponse)
+                }
+                else {
+                    self.delegate?.weatherError(VBWeatherConstant.Network.Network_Failed, message: VBWeatherConstant.Network.Network_Failed_Message)
+                }
+            })
+        }
+        else {
+            self.delegate?.weatherError(VBWeatherConstant.Network.Network_Failed, message: VBWeatherConstant.Network.Network_Failed_Message)
+        }
+    }
 }
 
 

@@ -10,7 +10,7 @@
 
 import Foundation
 
-class ETEIndigoUtilities: NSObject {
+class VBWeatherUtilities: NSObject {
 
     // MARK: String Management
 	

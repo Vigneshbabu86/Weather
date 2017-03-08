@@ -19,8 +19,25 @@ struct VBWeatherConstant {
             static let openWeatherMapAppIdParameterKey = "appid"
             static let openWeatherMapQueryByCityNameParameterKey = "q"
         }
-        struct openWeatherMapURL {
+        struct openWeatherMapURLs {
             static let openWeatherMapURL = "api.openweathermap.org/data/2.5/weather"
         }
+    }
+    
+    struct WebServiceRequestTypes {
+        static let GET = "GET"
+        static let DELETE = "DELETE"
+        static let POST = "POST"
+        static let PUT = "PUT"
+        static let HEAD = "HEAD"
+    }
+    
+    struct Network {
+        static let Network_Failed = "Network Error"
+        static let Network_Failed_Message = "No internet connection available."
+        static let NETWORK_FAIL_MESSSAGE_FOR_SEARCH =
+        "Network error.\nPlease check your internet connection and try again."
+        static let NETWORK_FAIL_ERROR_MESSSAGE_BODY = "Check your internet connection and try again."
+
     }
 }
