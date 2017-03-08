@@ -14,7 +14,7 @@ class ETEIndigoUtilities: NSObject {
 
     // MARK: String Management
 	
-    func objectOrNilForKey(_ aKey: String, dictionary: NSDictionary) -> AnyObject {
+    class func objectOrNilForKey(_ aKey: String, dictionary: NSDictionary) -> AnyObject {
         if let object = dictionary.object(forKey: aKey) {
             return object as AnyObject
         } else {
@@ -22,7 +22,7 @@ class ETEIndigoUtilities: NSObject {
         }
     }
 
-	func checkNilString(_ string: String?) -> String {
+	class func checkNilString(_ string: String?) -> String {
 		if let tempString = string {
 			return tempString
 		}
@@ -30,12 +30,12 @@ class ETEIndigoUtilities: NSObject {
 	}
 	
 	// MARK: Network Handling
-	func isConnectedToNetwork() -> Bool {
+	class func isConnectedToNetwork() -> Bool {
 		let connectionTuple = Reachability.isConnectedToNetwork()
 		return connectionTuple.0
 	}
 
-	func isConnectionTypeCellular() -> Bool {
+	class func isConnectionTypeCellular() -> Bool {
 		let connectionTuple = Reachability.isConnectedToNetwork()
 		return connectionTuple.1
 

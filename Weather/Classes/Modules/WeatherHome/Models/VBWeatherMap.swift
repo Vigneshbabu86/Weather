@@ -10,25 +10,72 @@
 import Foundation
 import UIKit
 
+/// Weather data for a specific location
 class VBWeatherMap: NSObject {
-	var wind: String?
-	var cloudiness: String?
-	var pressure: String?
-	var humidity: String?
-	var sunrise: String?
-	var sunset: String?
-	var geoCoordinates: String?
+    
+    /// The wind speed at the given time in miles per hour.
+	public var windSpeed: Float?
+    
+    /// A text summary of the weather.
+	public var weatherDescription: String?
+    
+    /// The sea-level air pressure in millibars.
+	public var pressure: String?
+    
+    /// Name of the icon suitable for the weather to display
+    public var icon: String?
+    
+    /// Value between `0` and `1` (inclusive) representing the relative humidity.
+    public var humidity: Float?
+    
+    /// The time of the last sunrise before the solar noon closest to local noon on the given day.
+	public var sunrise: Date?
+    
+    /// The time of the first sunset after the solar noon closest to local noon on the given day.
+	public var sunset: Date?
+    
+    /// The temperature at the given time in degrees Fahrenheit.
+    public var temperature: Float?
+    
+    /// The minimum temperature on the given day in degrees Fahrenheit.
+    public var temperatureMin: Float?
+    
+    /// The maximum temperature on the given day in degrees Fahrenheit.
+    public var temperatureMax: Float?
+    
+    /// The average visibility in miles, capped at `10`.
+    public var visibility: Float?
+    
+    // Latitude of the location
+	public var latitude: Float?
+    
+    // Longitude of the location
+    public var longitude: Float?
+    
+    // Name of the country
+    public var country: String?
+    
+    // Name of the city
+    public var city: String?
 	
 
-    init?( wind: String, cloudiness: String, pressure: String, humidity: String, sunrise: String, sunset: String, geoCoordinates: String) {
+    init?( windSpeed: Float, weatherDescription: String, pressure: String, icon: String, humidity: Float, sunrise: Date, sunset: Date, temperature: Float, temperatureMin: Float, temperatureMax: Float, visibility: Float, latitude: Float, longitude: Float, country: String, city: String) {
 
-        self.wind = wind
-        self.cloudiness = cloudiness
+        self.windSpeed = windSpeed
+        self.weatherDescription = weatherDescription
         self.pressure = pressure
+        self.icon = icon
         self.humidity = humidity
         self.sunrise = sunrise
         self.sunset = sunset
-        self.geoCoordinates = geoCoordinates
+        self.temperature = temperature
+        self.temperatureMin = temperatureMin
+        self.temperatureMax = temperatureMax
+        self.visibility = visibility
+        self.latitude = latitude
+        self.longitude = longitude
+        self.country = country
+        self.city = city
 
 	}
 }
