@@ -17,7 +17,7 @@ protocol VBWeatherHomeViewControllerOutput {
     func saveLastSearchedCity(_ city: String)
 }
 
-class VBWeatherHomeViewController: VBWeatherBaseViewController, VBWeatherHomePresenterOutput {
+class VBWeatherHomeViewController: UITableViewController, VBWeatherHomePresenterOutput {
     // Configurator Input
     var output: VBWeatherHomeViewControllerOutput!
     var router: VBWeatherHomeRouter!
