@@ -12,7 +12,7 @@ import Foundation
 
 //MARK: Output Interface
 protocol VBWeatherHomeInteractorOutput {
-    func weatherDataRequestComplete(_ dataDictionary: NSDictionary, error: NSError?)
+    func weatherDataRequestComplete(_ weatherMapEntity: VBWeatherMap?, error: NSError?)
     func weatherDataRequestFailed(_ title: String?, errorMsg: String!)
     func isValidCityTextEntry (_ isValid: Bool, errorMsg: String!, cityName:String!)
 }
@@ -20,6 +20,7 @@ protocol VBWeatherHomeInteractorOutput {
 ///
 class VBWeatherHomeInteractor : VBWeatherHomeViewControllerOutput, VBWeatherHomeWorkerOutput {
     var output: VBWeatherHomeInteractorOutput!
+    let weatherParser = VBWeatherHomeParser()
     fileprivate var weatherWorker = VBWeatherHomeWorker()
     
     // MARK:  VBWeatherHomeViewControllerOutput
@@ -45,12 +46,9 @@ class VBWeatherHomeInteractor : VBWeatherHomeViewControllerOutput, VBWeatherHome
     }
 
     // MARK:  VBWeatherHomeWorkerOutput
-    
     internal func weatherResults(_ jsonresult: NSDictionary) {
-        if jsonresult.count > 0 {
-            
-        }
-        self.output.weatherDataRequestComplete(jsonresult, error: nil)
+        let weatherMap = weatherParser.parserWeatherMapData(jsonresult)
+        self.output.weatherDataRequestComplete(weatherMap, error: nil)
     }
     
     internal func weatherError(_ title: String?, message: String!) {

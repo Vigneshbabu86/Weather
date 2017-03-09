@@ -111,7 +111,7 @@ class VBWeatherHomeViewController: UITableViewController, VBWeatherHomePresenter
 // MARK: VBWeatherHomePresenterOutput
 typealias WeatherPresenter = VBWeatherHomeViewController
 extension WeatherPresenter {
-    internal func updateViewBasedOnWeatherRequestSuccess(_ weatherMap: VBWeatherMap) {
+    internal func updateViewBasedOnWeatherRequestSuccess(_ weatherMap: VBWeatherMap?) {
         
     }
     

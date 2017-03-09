@@ -12,7 +12,7 @@ import Foundation
 
 //MARK: Output Interface
 protocol VBWeatherHomePresenterOutput: class {
-    func updateViewBasedOnWeatherRequestSuccess(_ weatherMap: VBWeatherMap)
+    func updateViewBasedOnWeatherRequestSuccess(_ weatherMap: VBWeatherMap?)
     func updateViewBasedOnCityTextEntry(_ isSuccess: Bool, errorMsg: String?, cityName: String!)
     func updateViewBasedOnWeatherRequestFailed(_ title: String?, errorMsg: String!)
     func hideActivityIndicator()
@@ -29,8 +29,8 @@ class VBWeatherHomePresenter: NSObject, VBWeatherHomeInteractorOutput {
      - Parameter dataDictionary:   JSON representation of object.
      - Parameter error: The error instance if any
      */
-    internal func weatherDataRequestComplete(_ dataDictionary: NSDictionary, error: NSError?) {
-        
+    internal func weatherDataRequestComplete(_ weatherMapEntity: VBWeatherMap?, error: NSError?) {
+        output.updateViewBasedOnWeatherRequestSuccess(weatherMapEntity)
     }
     
     /**
