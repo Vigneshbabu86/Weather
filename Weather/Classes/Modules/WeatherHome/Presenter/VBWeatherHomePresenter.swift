@@ -1,7 +1,7 @@
 /**
  * @author Vignesh Babu
  *
- * @brief
+ * @brief Contains view logic for preparing content for display (as received from the Interactor) and for reacting to user inputs (by requesting new data from the Interactor)
  *
  * @version 1.0
  *
@@ -18,6 +18,7 @@ protocol VBWeatherHomePresenterOutput: class {
     func hideActivityIndicator()
 }
 
+/// Prepares the data for display and Reacts to User Inputs
 class VBWeatherHomePresenter: NSObject, VBWeatherHomeInteractorOutput {
     weak var output: VBWeatherHomePresenterOutput!
     fileprivate var weatherParser = VBWeatherHomeParser()
@@ -30,7 +31,13 @@ class VBWeatherHomePresenter: NSObject, VBWeatherHomeInteractorOutput {
      - Parameter error: The error instance if any
      */
     internal func weatherDataRequestComplete(_ weatherMapEntity: VBWeatherMap?, error: NSError?) {
-        output.updateViewBasedOnWeatherRequestSuccess(weatherMapEntity)
+        if weatherMapEntity?.statusCode == 200 {
+            output.updateViewBasedOnWeatherRequestSuccess(weatherMapEntity)
+        }
+        else {
+         let errorMsg = weatherMapEntity?.errorMessage ?? ""
+          output.updateViewBasedOnWeatherRequestFailed("", errorMsg: errorMsg)
+        }
     }
     
     /**
@@ -40,7 +47,7 @@ class VBWeatherHomePresenter: NSObject, VBWeatherHomeInteractorOutput {
      - Parameter error: The error message needs to be displayed
      */
     internal func weatherDataRequestFailed(_ title: String?, errorMsg: String!) {
-        
+        output.updateViewBasedOnWeatherRequestFailed(title, errorMsg: errorMsg)
     }
     
     /**

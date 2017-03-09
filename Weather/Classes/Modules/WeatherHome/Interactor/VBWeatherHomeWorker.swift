@@ -17,11 +17,17 @@ protocol VBWeatherHomeWorkerOutput: class {
     
 }
 
-///
+/// Worker Class to Handle the weather lookup for the city
 class VBWeatherHomeWorker: NSObject {
     
+    /// Worker Output Deleagte
     weak var delegate: VBWeatherHomeWorkerOutput?
     
+    /**
+     Helps to lookup the weather for the city
+     
+     - Parameter city: Name of the city used to get the weather
+     */
     func lookupWeather(_ cityName: String){
         if VBWeatherUtilities.isConnectedToNetwork() {
             let baseURl =  VBWeatherConstant.openWeatherMap.openWeatherMapURLs.openWeatherMapURL

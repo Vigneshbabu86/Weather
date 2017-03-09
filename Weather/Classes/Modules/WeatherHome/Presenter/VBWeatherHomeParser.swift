@@ -1,7 +1,7 @@
 /**
  * @author Vignesh Babu
  *
- * @brief
+ * @brief Weather data mapper from JSON to VBWeatherMap
  *
  * @version 1.0
  *
@@ -10,21 +10,23 @@
 
 import Foundation
 
-///
+/// Parse the Weather Response data in JSON format into VBWeatherMap instance
 class VBWeatherHomeParser: NSObject {
 
+    /**
+     Parse the weather map data
+     
+     - Parameter dataDictionary: Weather JSON data as NSDictionary instance
+     */
     func parserWeatherMapData(_ dataDictionary: NSDictionary) -> VBWeatherMap? {
-
         var windSpeed: Float?
         let windInfo = dataDictionary[WeatherMap.Json.WIND] as? NSDictionary
         if windInfo != nil {
             windSpeed = windInfo?[WeatherMap.Json.WIND_SPEED] as? Float
         }
         
-        
         var weatherDescription: String? = nil
         var icon: String? = nil
-        
         let weatherArray = dataDictionary[WeatherMap.Json.WEATHER] as? NSArray
         if (weatherArray != nil) {
             for weatherInfo in weatherArray! {
@@ -48,9 +50,7 @@ class VBWeatherHomeParser: NSObject {
             temperatureMax = main?[WeatherMap.Json.MAIN_TEMP_MAX] as? Float
             humidity = main?[WeatherMap.Json.MAIN_HUMIDITY] as? Float
         }
-        
-        let visibility = dataDictionary[WeatherMap.Json.VISIBILITY] as? Float
-        
+    
         var latitude : Float? = nil
         var longitude : Float? = nil
         let coordinatesDictionary = dataDictionary[WeatherMap.Json.COORDINATES] as? NSDictionary
@@ -78,9 +78,8 @@ class VBWeatherHomeParser: NSObject {
         let city = dataDictionary[WeatherMap.Json.NAME] as? String
         let errorMessage = dataDictionary[WeatherMap.Json.MESSAGE] as? String
         let statusCode = dataDictionary[WeatherMap.Json.STATUS_CODE] as? Int
+        let visibility = dataDictionary[WeatherMap.Json.VISIBILITY] as? Float
         
         return VBWeatherMap(windSpeed: windSpeed, weatherDescription: weatherDescription, pressure: pressure, icon: icon, humidity: humidity, sunrise: sunriseDate, sunset: sunsetDate, temperature: temperature, temperatureMin: temperatureMin, temperatureMax: temperatureMax, visibility: visibility, latitude: latitude, longitude: longitude, country: country, city: city, statusCode: statusCode, errorMessage: errorMessage)
     }
 }
-
-

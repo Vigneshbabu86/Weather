@@ -36,13 +36,9 @@ class VBWeatherHomeConfigurator {
     ///     - viewController: The viewcontroller needs to be configured
     ///
 	func configure(_ viewController: VBWeatherHomeViewController) {
-
 		let presenter = VBWeatherHomePresenter()
 		let interactor = VBWeatherHomeInteractor()
-		let router = VBWeatherHomeRouter()
-		router.viewController = viewController
 		viewController.output = interactor
-		viewController.router = router
 		interactor.output = presenter
 		presenter.output = viewController
 

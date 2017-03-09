@@ -17,17 +17,16 @@ protocol VBWeatherHomeViewControllerOutput {
     func saveLastSearchedCity(_ city: String)
 }
 
+/// Interacts with presenter and
 class VBWeatherHomeViewController: UITableViewController, VBWeatherHomePresenterOutput {
     // Configurator Input
     var output: VBWeatherHomeViewControllerOutput!
-    var router: VBWeatherHomeRouter!
-   
     
     // MARK : View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        output.validateCity("chennai")
+        output.validateCity("iiiiiiii")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +44,7 @@ class VBWeatherHomeViewController: UITableViewController, VBWeatherHomePresenter
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        // Configure the controller
         VBWeatherHomeConfigurator.sharedInstance.configure(self)
     }
     
@@ -111,6 +111,13 @@ class VBWeatherHomeViewController: UITableViewController, VBWeatherHomePresenter
 // MARK: VBWeatherHomePresenterOutput
 typealias WeatherPresenter = VBWeatherHomeViewController
 extension WeatherPresenter {
+    
+    /**
+     Handles the failure status of the weather request completion
+     
+     - Parameter title: The alert title needs to be used
+     - Parameter error: The error message needs to be displayed
+     */
     internal func updateViewBasedOnWeatherRequestSuccess(_ weatherMap: VBWeatherMap?) {
         
     }

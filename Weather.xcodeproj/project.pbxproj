@@ -25,7 +25,6 @@
 		18891E891E6FEA7500D58CD8 /* VBWeatherMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E7B1E6FEA7500D58CD8 /* VBWeatherMap.swift */; };
 		18891E8A1E6FEA7500D58CD8 /* VBWeatherHomeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E7D1E6FEA7500D58CD8 /* VBWeatherHomeParser.swift */; };
 		18891E8B1E6FEA7500D58CD8 /* VBWeatherHomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E7E1E6FEA7500D58CD8 /* VBWeatherHomePresenter.swift */; };
-		18891E8C1E6FEA7500D58CD8 /* VBWeatherHomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E801E6FEA7500D58CD8 /* VBWeatherHomeRouter.swift */; };
 		18891E8D1E6FEA7500D58CD8 /* VBWeatherHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E831E6FEA7500D58CD8 /* VBWeatherHomeViewController.swift */; };
 		18891E901E705B3C00D58CD8 /* VBWeatherHomeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E8F1E705B3C00D58CD8 /* VBWeatherHomeConstants.swift */; };
 /* End PBXBuildFile section */
@@ -72,7 +71,6 @@
 		18891E7B1E6FEA7500D58CD8 /* VBWeatherMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherMap.swift; sourceTree = "<group>"; };
 		18891E7D1E6FEA7500D58CD8 /* VBWeatherHomeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherHomeParser.swift; sourceTree = "<group>"; };
 		18891E7E1E6FEA7500D58CD8 /* VBWeatherHomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherHomePresenter.swift; sourceTree = "<group>"; };
-		18891E801E6FEA7500D58CD8 /* VBWeatherHomeRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherHomeRouter.swift; sourceTree = "<group>"; };
 		18891E831E6FEA7500D58CD8 /* VBWeatherHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherHomeViewController.swift; sourceTree = "<group>"; };
 		18891E8F1E705B3C00D58CD8 /* VBWeatherHomeConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherHomeConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -255,7 +253,6 @@
 				18891E771E6FEA7500D58CD8 /* Interactor */,
 				18891E7A1E6FEA7500D58CD8 /* Models */,
 				18891E7C1E6FEA7500D58CD8 /* Presenter */,
-				18891E7F1E6FEA7500D58CD8 /* Router */,
 				18891E811E6FEA7500D58CD8 /* ViewController */,
 			);
 			path = WeatherHome;
@@ -293,14 +290,6 @@
 				18891E7E1E6FEA7500D58CD8 /* VBWeatherHomePresenter.swift */,
 			);
 			path = Presenter;
-			sourceTree = "<group>";
-		};
-		18891E7F1E6FEA7500D58CD8 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				18891E801E6FEA7500D58CD8 /* VBWeatherHomeRouter.swift */,
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		18891E811E6FEA7500D58CD8 /* ViewController */ = {
@@ -471,7 +460,6 @@
 				18891E841E6FEA7500D58CD8 /* AppDelegate.swift in Sources */,
 				18891E8D1E6FEA7500D58CD8 /* VBWeatherHomeViewController.swift in Sources */,
 				18891E8B1E6FEA7500D58CD8 /* VBWeatherHomePresenter.swift in Sources */,
-				18891E8C1E6FEA7500D58CD8 /* VBWeatherHomeRouter.swift in Sources */,
 				18891E6A1E6FEA6E00D58CD8 /* Weather.xcdatamodeld in Sources */,
 				18891E861E6FEA7500D58CD8 /* VBWeatherHomeConfigurator.swift in Sources */,
 				1861DF331E709F6000068912 /* VBWeatherWebServiceManager.swift in Sources */,
