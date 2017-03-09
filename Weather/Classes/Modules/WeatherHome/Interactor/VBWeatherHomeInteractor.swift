@@ -52,12 +52,26 @@ class VBWeatherHomeInteractor : VBWeatherHomeViewControllerOutput, VBWeatherHome
     }
     
     /**
-     Save the last city in local cache for application n=next relaunch
+     Save the last city in local cache for application next relaunch
      
      - Parameter city: Name of the city used to get the weather
      */
     internal func saveLastSearchedCity(_ city: String) {
-        
+        let defaults = UserDefaults.standard
+        if city.characters.count > 0 {
+            defaults.set(city, forKey: VBWeatherConstant.UserDefaultKeys.LastSearchedCityKey)
+        }
+    }
+    
+    /**
+     Retreives the last searched city from the user defaults
+     
+     - Return city: Name of the city used to get the weather
+     */
+    internal func getLastSearchedCity() -> String {
+        let defaults = UserDefaults.standard
+        let lastSearchedCity = defaults.value(forKey:  VBWeatherConstant.UserDefaultKeys.LastSearchedCityKey) as? String ?? ""
+        return lastSearchedCity
     }
 
     // MARK:  VBWeatherHomeWorkerOutput

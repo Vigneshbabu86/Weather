@@ -1,10 +1,12 @@
-//
-//  WeatherTests.swift
-//  WeatherTests
-//
-//  Created by Babu, Vignesh on 3/7/17.
-//  Copyright © 2017 Babu, Vignesh. All rights reserved.
-//
+/**
+ * @author Vignesh Babu
+ *
+ * @brief Weather Test Case
+ *
+ * @version 1.0
+ *
+ * @copyright Copyright (c) 2017 Vignesh Babu. All rights reserved.
+ */
 
 import XCTest
 @testable import Weather

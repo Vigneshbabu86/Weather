@@ -15,6 +15,7 @@ protocol VBWeatherHomeViewControllerOutput {
     func validateCity(_ city: String)
     func searchWeatherForCity(_ city: String)
     func saveLastSearchedCity(_ city: String)
+    func getLastSearchedCity() -> String 
 }
 
 let reuseIdentifierWeatherDescriptionCell = "WeatherDescriptionCell"
@@ -60,6 +61,9 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
     /// Activity Indicator View
     var activityIndicator: UIActivityIndicatorView?
     
+    /// View Loaded Status
+    var isViewLoadingCompletedForPreviousSearchCompleted = false
+    
     // MARK : View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +89,13 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if (isViewLoadingCompletedForPreviousSearchCompleted == false) {
+            self.isViewLoadingCompletedForPreviousSearchCompleted = true
+            let lastSearchedCity = self.output.getLastSearchedCity()
+            if lastSearchedCity.characters.count > 0 {
+                self.output.validateCity(lastSearchedCity)
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -234,21 +245,8 @@ extension WeatherPresenter {
         
         // Clear all the data
         self.weatherTableDataInfo.removeAll()
-        // Construct Weather Tableview Data from VBWeatherMap instance
-//        if weatherMap != nil {
-//            self.weatherTableDataInfo[WeatherCategory.WeatherDescription.rawValue] = weatherMap
-//            self.weatherTableDataInfo[WeatherCategory.Wind.rawValue] = weatherMap?.windSpeed ?? ""
-//            self.weatherTableDataInfo[WeatherCategory.Pressure.rawValue] = weatherMap?.pressure ?? ""
-//            self.weatherTableDataInfo[WeatherCategory.Humidity.rawValue] = weatherMap?.humidity ?? ""
-//            self.weatherTableDataInfo[WeatherCategory.Sunrise.rawValue] = weatherMap?.sunrise ?? ""
-//            self.weatherTableDataInfo[WeatherCategory.Sunset.rawValue] = weatherMap?.sunset ?? ""
-//            let latitude =  (weatherMap?.latitude) ?? 0
-//            let longitude = weatherMap?.longitude ?? 0
-//            let geoCordinates = "[" + "\(latitude)" + "," + "\(longitude)" + "]"
-//            self.weatherTableDataInfo[WeatherCategory.GeoCoords.rawValue] = geoCordinates
-//
-//        }
         
+        // Construct Weather Tableview Data from VBWeatherMap instance
         if weatherMap != nil {
             for weatherCategory in iterateEnum(WeatherCategory.self) {
                 switch weatherCategory {
@@ -282,6 +280,10 @@ extension WeatherPresenter {
         
         self.tableView?.reloadData()
         self.hideActivityIndicator()
+        
+        // save the last searched city in history
+        let citySearched = weatherMap?.city ?? ""
+        self.output.saveLastSearchedCity(citySearched)
     }
     
     /**

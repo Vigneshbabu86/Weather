@@ -39,14 +39,14 @@ class VBWeatherHomeWorker: NSObject {
                         self?.delegate?.weatherResults(jsonResponse)
                     }
                     else {
-                        self?.delegate?.weatherError(VBWeatherConstant.Network.Network_Failed, message: VBWeatherConstant.Network.Network_Failed_Message)
+                        self?.delegate?.weatherError(VBWeatherConstant.Network.NetworkFailed, message: VBWeatherConstant.Network.NetworkFailedMessage)
                     }
                 }
                 
             })
         }
         else {
-            self.delegate?.weatherError(VBWeatherConstant.Network.Network_Failed, message: VBWeatherConstant.Network.Network_Failed_Message)
+            self.delegate?.weatherError(VBWeatherConstant.Network.NetworkFailed, message: VBWeatherConstant.Network.NetworkFailedMessage)
         }
     }
 }
