@@ -14,7 +14,7 @@ import Foundation
 protocol VBWeatherHomePresenterOutput: class {
     func updateViewBasedOnWeatherRequestSuccess(_ weatherMap: VBWeatherMap?)
     func updateViewBasedOnCityTextValidation(_ isSuccess: Bool, errorMsg: String?, cityName: String!)
-    func updateViewBasedOnWeatherRequestFailed(_ title: String?, errorMsg: String!)
+    func updateViewBasedOnWeatherRequestFailed(_ title: String?, errorMsg: String?)
     func hideActivityIndicator()
 }
 

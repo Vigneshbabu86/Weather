@@ -27,6 +27,8 @@
 		18891E8B1E6FEA7500D58CD8 /* VBWeatherHomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E7E1E6FEA7500D58CD8 /* VBWeatherHomePresenter.swift */; };
 		18891E8D1E6FEA7500D58CD8 /* VBWeatherHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E831E6FEA7500D58CD8 /* VBWeatherHomeViewController.swift */; };
 		18891E901E705B3C00D58CD8 /* VBWeatherHomeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E8F1E705B3C00D58CD8 /* VBWeatherHomeConstants.swift */; };
+		18D28FF01E7148F2002EAD85 /* VBWeatherDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D28FEE1E7148F2002EAD85 /* VBWeatherDescriptionTableViewCell.swift */; };
+		18D28FF11E7148F2002EAD85 /* VBWeatherDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D28FEF1E7148F2002EAD85 /* VBWeatherDetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		18891E7E1E6FEA7500D58CD8 /* VBWeatherHomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherHomePresenter.swift; sourceTree = "<group>"; };
 		18891E831E6FEA7500D58CD8 /* VBWeatherHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherHomeViewController.swift; sourceTree = "<group>"; };
 		18891E8F1E705B3C00D58CD8 /* VBWeatherHomeConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherHomeConstants.swift; sourceTree = "<group>"; };
+		18D28FEE1E7148F2002EAD85 /* VBWeatherDescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherDescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		18D28FEF1E7148F2002EAD85 /* VBWeatherDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherDetailTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +252,7 @@
 		18891E741E6FEA7500D58CD8 /* WeatherHome */ = {
 			isa = PBXGroup;
 			children = (
+				18EF744E1E7134E400F922D0 /* View */,
 				18891E8E1E705B3C00D58CD8 /* Constants */,
 				18891E751E6FEA7500D58CD8 /* Configurator */,
 				18891E771E6FEA7500D58CD8 /* Interactor */,
@@ -314,6 +319,23 @@
 				18891E8F1E705B3C00D58CD8 /* VBWeatherHomeConstants.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		18D28FED1E7148F2002EAD85 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				18D28FEE1E7148F2002EAD85 /* VBWeatherDescriptionTableViewCell.swift */,
+				18D28FEF1E7148F2002EAD85 /* VBWeatherDetailTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		18EF744E1E7134E400F922D0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18D28FED1E7148F2002EAD85 /* Cell */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18891E8A1E6FEA7500D58CD8 /* VBWeatherHomeParser.swift in Sources */,
+				18D28FF01E7148F2002EAD85 /* VBWeatherDescriptionTableViewCell.swift in Sources */,
 				18891E901E705B3C00D58CD8 /* VBWeatherHomeConstants.swift in Sources */,
 				18891E871E6FEA7500D58CD8 /* VBWeatherHomeInteractor.swift in Sources */,
 				183B20621E708A0E00BEDA2F /* VBWeatherConstant.swift in Sources */,
@@ -462,6 +485,7 @@
 				18891E8B1E6FEA7500D58CD8 /* VBWeatherHomePresenter.swift in Sources */,
 				18891E6A1E6FEA6E00D58CD8 /* Weather.xcdatamodeld in Sources */,
 				18891E861E6FEA7500D58CD8 /* VBWeatherHomeConfigurator.swift in Sources */,
+				18D28FF11E7148F2002EAD85 /* VBWeatherDetailTableViewCell.swift in Sources */,
 				1861DF331E709F6000068912 /* VBWeatherWebServiceManager.swift in Sources */,
 				183B205C1E7088F700BEDA2F /* VBWeatherUtilities.swift in Sources */,
 				183B20601E70893800BEDA2F /* VBWeatherBaseViewController.swift in Sources */,

@@ -46,24 +46,30 @@ class VBWeatherMap: NSObject {
     /// The average visibility in miles, capped at `10`.
     public var visibility: Float?
     
-    // Latitude of the location
+    /// Latitude of the location
 	public var latitude: Float?
     
-    // Longitude of the location
+    /// Longitude of the location
     public var longitude: Float?
     
-    // Name of the country
+    /// Name of the country
     public var country: String?
     
     // Name of the city
     public var city: String?
 	
-    // Name of the country
+    /// Name of the country
     public var statusCode: Int?
     
-    // Name of the city
+    /// Name of the city
     public var errorMessage: String?
     
+    /// Self description of the instance
+    override var description: String {
+        let selfDescription = "Wind Speed : \(self.windSpeed) \n" +
+        "Weather Description \(weatherDescription) \n"
+        return selfDescription
+    }
 
     init?( windSpeed: Float?, weatherDescription: String?, pressure: Float?, icon: String?, humidity: Float?, sunrise: Date?, sunset: Date?, temperature: Float?, temperatureMin: Float?, temperatureMax: Float?, visibility: Float?, latitude: Float?, longitude: Float?, country: String?, city: String?, statusCode:Int?, errorMessage:String?) {
 
@@ -86,10 +92,4 @@ class VBWeatherMap: NSObject {
         self.errorMessage = errorMessage
 	}
     
-    
-    override var description: String {
-        let selfDescription = "Wind Speed : \(self.windSpeed)" +
-                               "Weather Description \(weatherDescription)"
-        return selfDescription
-    }
 }

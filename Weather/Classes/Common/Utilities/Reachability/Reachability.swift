@@ -11,15 +11,13 @@
 import Foundation
 import SystemConfiguration
 
+/// Helps to check the network rwachability for the given host
 open class Reachability {
-
-	/*! ------------------------------------------------------------------------------------------------
-	 @type Tuple (Bool,Bool)
-	 @function isConnectedToNetwork
-	 @description verifies if network connectivity is available
-	 @param nil
-	 ---------------------------------------------------------------------------------------------------- */
-
+    /**
+     Verifies if network connectivity is available
+     
+     - Return type: Tuple (Bool,Bool)
+     */
 	class func isConnectedToNetwork() -> (Bool, Bool) {
 
 		var zeroAddress = sockaddr_in()
