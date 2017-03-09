@@ -14,12 +14,16 @@ class VBWeatherHomeConfigurator {
     
     // MARK: Initializers
 
+    /**
+     Initializer with fileprotected access modifier to prevent accident initialization in some other places
+     */
     fileprivate  init() {
         
     }
-    
-    /// Returns the shared instance of the VBWeatherHomeConfigurator object
-    ///
+
+    /**
+     Returns the shared instance of the VBWeatherHomeConfigurator object
+     */
     static let sharedInstance: VBWeatherHomeConfigurator = {
         let instance = VBWeatherHomeConfigurator()
         // setup code
@@ -27,14 +31,12 @@ class VBWeatherHomeConfigurator {
     }()
 
 
-	// MARK: Configuration
-    
-    /// Configure the viewcontrooller with the
-    /// presenter, interactor and router
-    ///
-    /// - Parameters:
-    ///     - viewController: The viewcontroller needs to be configured
-    ///
+	// MARK: VIBER Configuration
+    /**
+     Configure the viewcontrooller with the presenter, interactor and router
+     
+     - Parameter viewController: The viewcontroller needs to be configured
+     */
 	func configure(_ viewController: VBWeatherHomeViewController) {
 		let presenter = VBWeatherHomePresenter()
 		let interactor = VBWeatherHomeInteractor()

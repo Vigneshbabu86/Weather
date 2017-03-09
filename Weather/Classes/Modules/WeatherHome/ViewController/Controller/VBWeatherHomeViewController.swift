@@ -105,7 +105,17 @@ class VBWeatherHomeViewController: UITableViewController, VBWeatherHomePresenter
      return true
      }
      */
-
+    
+    
+    class func showAlert(_ title: String, message: String, presenter: UIViewController ,actions:() -> ([UIAlertAction])) {
+        let alert: UIAlertController =
+            UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alertActions:[UIAlertAction] = actions()
+        for action:UIAlertAction in alertActions {
+            alert.addAction(action)
+        }
+        presenter.present(alert, animated: false, completion: nil)
+    }
 }
 
 // MARK: VBWeatherHomePresenterOutput
@@ -113,20 +123,42 @@ typealias WeatherPresenter = VBWeatherHomeViewController
 extension WeatherPresenter {
     
     /**
+     Handles the success status of the weather request completion
+     
+     - Parameter weatherMap: Weather Data for the searched city
+     */
+    internal func updateViewBasedOnWeatherRequestSuccess(_ weatherMap: VBWeatherMap?) {
+        print("Weather Map Instance : \(weatherMap)")
+    }
+    
+    /**
      Handles the failure status of the weather request completion
      
      - Parameter title: The alert title needs to be used
      - Parameter error: The error message needs to be displayed
      */
-    internal func updateViewBasedOnWeatherRequestSuccess(_ weatherMap: VBWeatherMap?) {
+    internal func updateViewBasedOnWeatherRequestFailed(_ title: String? = "", errorMsg: String!) {
         
+        if let title = title, let message = errorMsg {
+            let CancelAction =
+                UIAlertAction(
+                    title: "Cancel",
+                    style: UIAlertActionStyle.cancel) { (cancelAction:UIAlertAction) in
+            }
+            
+            VBWeatherHomeViewController.showAlert(
+                title ,
+                message: message ,
+                presenter: self) { () -> ([UIAlertAction]) in
+                    
+                    return [CancelAction]
+                    
+            }
+            
+        }
     }
     
-    internal func updateViewBasedOnWeatherRequestFailed(_ title: String?, errorMsg: String!) {
-        
-    }
-    
-    internal func updateViewBasedOnCityTextEntry(_ isSuccess: Bool, errorMsg: String?, cityName: String!) {
+    internal func updateViewBasedOnCityTextValidation(_ isSuccess: Bool, errorMsg: String?, cityName: String!) {
         output.searchWeatherForCity(cityName)
     }
     

@@ -13,7 +13,7 @@ import Foundation
 //MARK: Output Interface
 protocol VBWeatherHomePresenterOutput: class {
     func updateViewBasedOnWeatherRequestSuccess(_ weatherMap: VBWeatherMap?)
-    func updateViewBasedOnCityTextEntry(_ isSuccess: Bool, errorMsg: String?, cityName: String!)
+    func updateViewBasedOnCityTextValidation(_ isSuccess: Bool, errorMsg: String?, cityName: String!)
     func updateViewBasedOnWeatherRequestFailed(_ title: String?, errorMsg: String!)
     func hideActivityIndicator()
 }
@@ -60,6 +60,6 @@ class VBWeatherHomePresenter: NSObject, VBWeatherHomeInteractorOutput {
         if !isValid {
             output.hideActivityIndicator()
         }
-        output.updateViewBasedOnCityTextEntry(isValid, errorMsg: errorMsg, cityName: cityName)
+        output.updateViewBasedOnCityTextValidation(isValid, errorMsg: errorMsg, cityName: cityName)
     }
 }
