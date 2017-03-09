@@ -25,6 +25,9 @@ class VBWeatherMap: NSObject {
     /// Name of the icon suitable for the weather to display
     public var icon: String?
     
+    /// Download URL of the icon
+    public var iconDownloadURL: String?
+    
     /// Value between `0` and `1` (inclusive) representing the relative humidity.
     public var humidity: Float?
     
@@ -77,6 +80,14 @@ class VBWeatherMap: NSObject {
         self.weatherDescription = weatherDescription
         self.pressure = pressure
         self.icon = icon
+        
+        if let icon = icon {
+            iconDownloadURL = VBWeatherConstant.openWeatherMap.openWeatherMapURLs.openWeatherMapImageURL + icon + ".png"
+        }
+        else {
+            iconDownloadURL = nil
+        }
+        
         self.humidity = humidity
         self.sunrise = sunrise
         self.sunset = sunset

@@ -21,6 +21,7 @@ struct VBWeatherConstant {
         }
         struct openWeatherMapURLs {
             static let openWeatherMapURL = "http://api.openweathermap.org/data/2.5/weather"
+            static let openWeatherMapImageURL = "http://openweathermap.org/img/w/"
         }
     }
     

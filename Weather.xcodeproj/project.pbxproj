@@ -10,6 +10,7 @@
 		183B205C1E7088F700BEDA2F /* VBWeatherUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B205B1E7088F700BEDA2F /* VBWeatherUtilities.swift */; };
 		183B20601E70893800BEDA2F /* VBWeatherBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B205F1E70893800BEDA2F /* VBWeatherBaseViewController.swift */; };
 		183B20621E708A0E00BEDA2F /* VBWeatherConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B20611E708A0E00BEDA2F /* VBWeatherConstant.swift */; };
+		185875771E716D470032CA4D /* UIImageViewAsynchronous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185875761E716D470032CA4D /* UIImageViewAsynchronous.swift */; };
 		1861DF331E709F6000068912 /* VBWeatherWebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861DF321E709F6000068912 /* VBWeatherWebServiceManager.swift */; };
 		18891E471E6FC66600D58CD8 /* WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E461E6FC66600D58CD8 /* WeatherTests.swift */; };
 		18891E521E6FC66600D58CD8 /* WeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18891E511E6FC66600D58CD8 /* WeatherUITests.swift */; };
@@ -52,6 +53,7 @@
 		183B205B1E7088F700BEDA2F /* VBWeatherUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherUtilities.swift; sourceTree = "<group>"; };
 		183B205F1E70893800BEDA2F /* VBWeatherBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherBaseViewController.swift; sourceTree = "<group>"; };
 		183B20611E708A0E00BEDA2F /* VBWeatherConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherConstant.swift; sourceTree = "<group>"; };
+		185875761E716D470032CA4D /* UIImageViewAsynchronous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewAsynchronous.swift; sourceTree = "<group>"; };
 		1861DF321E709F6000068912 /* VBWeatherWebServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBWeatherWebServiceManager.swift; sourceTree = "<group>"; };
 		18891E2B1E6FC66500D58CD8 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18891E3D1E6FC66500D58CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,6 +120,23 @@
 				183B205F1E70893800BEDA2F /* VBWeatherBaseViewController.swift */,
 			);
 			path = BaseViewController;
+			sourceTree = "<group>";
+		};
+		185875741E716D100032CA4D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				185875751E716D100032CA4D /* UiImageView */,
+			);
+			name = Categories;
+			path = Common/Categories;
+			sourceTree = "<group>";
+		};
+		185875751E716D100032CA4D /* UiImageView */ = {
+			isa = PBXGroup;
+			children = (
+				185875761E716D470032CA4D /* UIImageViewAsynchronous.swift */,
+			);
+			path = UiImageView;
 			sourceTree = "<group>";
 		};
 		1861DF311E709F3900068912 /* Managers */ = {
@@ -190,6 +209,7 @@
 		18891E6B1E6FEA7500D58CD8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				185875741E716D100032CA4D /* Categories */,
 				18891E6C1E6FEA7500D58CD8 /* AppDelegate */,
 				18891E6E1E6FEA7500D58CD8 /* Common */,
 				18891E731E6FEA7500D58CD8 /* Modules */,
@@ -483,6 +503,7 @@
 				18891E841E6FEA7500D58CD8 /* AppDelegate.swift in Sources */,
 				18891E8D1E6FEA7500D58CD8 /* VBWeatherHomeViewController.swift in Sources */,
 				18891E8B1E6FEA7500D58CD8 /* VBWeatherHomePresenter.swift in Sources */,
+				185875771E716D470032CA4D /* UIImageViewAsynchronous.swift in Sources */,
 				18891E6A1E6FEA6E00D58CD8 /* Weather.xcdatamodeld in Sources */,
 				18891E861E6FEA7500D58CD8 /* VBWeatherHomeConfigurator.swift in Sources */,
 				18D28FF11E7148F2002EAD85 /* VBWeatherDetailTableViewCell.swift in Sources */,

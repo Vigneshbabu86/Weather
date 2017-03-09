@@ -38,6 +38,19 @@ class VBWeatherUtilities: NSObject {
 		}
 		return ""
 	}
+    
+    class func getDateAndTimeComponentsFromDate(_ date: Date?) -> String {
+        if let date = date {
+            let calendar = NSCalendar.current
+            let hour = calendar.component(.hour, from: date as Date)
+            let minutes = calendar.component(.minute, from: date as Date)
+            return "\(hour)" + ":" + "\(minutes)"
+        }
+        else {
+            return ""
+        }
+        
+    }
 	
 	// MARK: Network Handling
 	class func isConnectedToNetwork() -> Bool {

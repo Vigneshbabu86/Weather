@@ -47,7 +47,7 @@ enum WeatherCategory: String {
 /// Interacts with presenter
 class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataSource, UITableViewDelegate, VBWeatherHomePresenterOutput, UISearchBarDelegate {
     
-    var weatherTableDataInfo: [String:Any] = [:]
+    var weatherTableDataInfo: [String:AnyObject] = [:]
     
     @IBOutlet weak var searchBar: UISearchBar?
     @IBOutlet weak var tableView: UITableView?
@@ -92,8 +92,18 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
     
     // MARK: - Search Bar Delegates
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar?.resignFirstResponder()
         self.output.validateCity(searchBar.text ?? "")
-        self.tableView?.reloadData()
+        self.weatherTableDataInfo.removeAll()
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView?.reloadData()
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        DispatchQueue.main.async { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
     }
     
     // MARK: - Table view data source
@@ -114,10 +124,16 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierWeatherDescriptionCell, for: indexPath) as? VBWeatherDescriptionTableViewCell
             let possibleWeatherCategory = WeatherCategory(rawValue: String(indexPath.row))
             if  let weatherCategoryKey = possibleWeatherCategory?.rawValue {
-               let weatherMapObject  = self.weatherTableDataInfo[weatherCategoryKey] as? VBWeatherMap
-                cell?.weatherTemperatureLabel?.text = String(describing: weatherMapObject?.temperature)
-                cell?.weatherCityLabel?.text = String(describing: weatherMapObject?.city)
-                cell?.weatherDescriptionLabel?.text = String(describing: weatherMapObject?.weatherDescription)
+                let weatherMapObject  = self.weatherTableDataInfo[weatherCategoryKey] as? VBWeatherMap
+                var temperature = (weatherMapObject!.temperature) ?? 0
+                temperature = temperature - 273.15
+                cell?.weatherTemperatureLabel?.text = "\(temperature)" + " °C"
+                cell?.weatherCityLabel?.text = "Weather in " + (weatherMapObject?.city ?? "")
+                cell?.weatherDescriptionLabel?.text = weatherMapObject?.weatherDescription ?? ""
+                // Download and set the image asynchronously
+                if let weatherIconDownloadURL = weatherMapObject?.iconDownloadURL {
+                    cell?.weatherIconImageView?.loadImageUsingCacheWithUrl(urlString: weatherIconDownloadURL)
+                }
             }
             
             tempRowCell = cell
@@ -126,7 +142,9 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
             let possibleWeatherCategory = WeatherCategory(rawValue: String(indexPath.row))
             if  let weatherCategoryKey = possibleWeatherCategory?.rawValue {
                 cell?.weatherDetailKeyLabel?.text = possibleWeatherCategory?.displayString() ?? ""
-                cell?.weatherDetailValueLabel?.text = self.weatherTableDataInfo[weatherCategoryKey] as? String ?? ""
+                if let valueForKey = self.weatherTableDataInfo[weatherCategoryKey]! as? String {
+                    cell?.weatherDetailValueLabel?.text = VBWeatherUtilities.checkNilString(valueForKey)
+                }
             }
             
             tempRowCell = cell
@@ -251,28 +269,36 @@ extension WeatherPresenter {
 //
 //        }
         
-        for weatherCategory in iterateEnum(WeatherCategory.self) {
-            switch weatherCategory {
-            case .WeatherDescription:
-                self.weatherTableDataInfo[WeatherCategory.WeatherDescription.rawValue] = weatherMap
-            case .Wind:
-                self.weatherTableDataInfo[WeatherCategory.Wind.rawValue] = weatherMap?.windSpeed ?? ""
-            case .Pressure:
-                self.weatherTableDataInfo[WeatherCategory.Pressure.rawValue] = weatherMap?.pressure ?? ""
-            case .Humidity:
-                self.weatherTableDataInfo[WeatherCategory.Humidity.rawValue] = weatherMap?.humidity ?? ""
-            case .Sunrise:
-                self.weatherTableDataInfo[WeatherCategory.Sunrise.rawValue] = weatherMap?.sunrise ?? ""
-            case .Sunset:
-                self.weatherTableDataInfo[WeatherCategory.Sunset.rawValue] = weatherMap?.sunset ?? ""
-            case .GeoCoords:
-                 let latitude =  (weatherMap?.latitude) ?? 0
-            let longitude = weatherMap?.longitude ?? 0
-            let geoCordinates = "[" + "\(latitude)" + "," + "\(longitude)" + "]"
-                self.weatherTableDataInfo[WeatherCategory.GeoCoords.rawValue] = geoCordinates
-                
+        if weatherMap != nil {
+            for weatherCategory in iterateEnum(WeatherCategory.self) {
+                switch weatherCategory {
+                case .WeatherDescription:
+                    self.weatherTableDataInfo[WeatherCategory.WeatherDescription.rawValue] = weatherMap!
+                case .Wind:
+                    let windSpeed = (weatherMap!.windSpeed) ?? 0
+                    self.weatherTableDataInfo[WeatherCategory.Wind.rawValue] = "\(windSpeed)" + " m/s" as AnyObject?
+                case .Pressure:
+                    let pressure = (weatherMap!.pressure) ?? 0
+                    self.weatherTableDataInfo[WeatherCategory.Pressure.rawValue] = "\(pressure)" as AnyObject?
+                case .Humidity:
+                    let humidity = (weatherMap!.humidity) ?? 0
+                    self.weatherTableDataInfo[WeatherCategory.Humidity.rawValue] = "\(humidity)" as AnyObject?
+                case .Sunrise:
+                    let sunriseTime = VBWeatherUtilities.getDateAndTimeComponentsFromDate(weatherMap!.sunrise)
+                    self.weatherTableDataInfo[WeatherCategory.Sunrise.rawValue] = sunriseTime as AnyObject?
+                case .Sunset:
+                    let sunsetTime = VBWeatherUtilities.getDateAndTimeComponentsFromDate(weatherMap!.sunset)
+                    self.weatherTableDataInfo[WeatherCategory.Sunset.rawValue] = sunsetTime as AnyObject?
+                case .GeoCoords:
+                    let latitude =  (weatherMap?.latitude) ?? 0
+                    let longitude = weatherMap?.longitude ?? 0
+                    let geoCordinates = "[" + "\(latitude)" + "," + "\(longitude)" + "]"
+                    self.weatherTableDataInfo[WeatherCategory.GeoCoords.rawValue] = geoCordinates as AnyObject?
+                    
+                }
             }
         }
+        
         
         self.tableView?.reloadData()
     }
