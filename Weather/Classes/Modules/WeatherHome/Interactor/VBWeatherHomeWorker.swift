@@ -31,7 +31,8 @@ class VBWeatherHomeWorker: NSObject {
     func lookupWeather(_ cityName: String){
         if VBWeatherUtilities.isConnectedToNetwork() {
             let baseURl =  VBWeatherConstant.openWeatherMap.openWeatherMapURLs.openWeatherMapURL
-            let endPointURL = baseURl + "?" + VBWeatherConstant.openWeatherMap.openWeatherMapParmeterKeys.openWeatherMapQueryByCityNameParameterKey + "=" + cityName + "&" + VBWeatherConstant.openWeatherMap.openWeatherMapParmeterKeys.openWeatherMapAppIdParameterKey + "=" + VBWeatherConstant.openWeatherMap.openWeatherMapKeys.openWeatherMapApiKey
+            let escapedCityName = cityName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+            let endPointURL = baseURl + "?" + VBWeatherConstant.openWeatherMap.openWeatherMapParmeterKeys.openWeatherMapQueryByCityNameParameterKey + "=" + escapedCityName! + "&" + VBWeatherConstant.openWeatherMap.openWeatherMapParmeterKeys.openWeatherMapAppIdParameterKey + "=" + VBWeatherConstant.openWeatherMap.openWeatherMapKeys.openWeatherMapApiKey
             VBWeatherWebServiceManager.GETRequest(endPointURL, completionHandler: { (responseObject, error) in
                 
                 DispatchQueue.main.async { [weak self] in
