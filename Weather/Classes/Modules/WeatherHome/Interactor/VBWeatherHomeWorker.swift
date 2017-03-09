@@ -22,7 +22,7 @@ class VBWeatherHomeWorker: NSObject {
     
     weak var delegate: VBWeatherHomeWorkerOutput?
     
-    func handleWeatherRequest(_ cityName: String){
+    func lookupWeather(_ cityName: String){
         if VBWeatherUtilities.isConnectedToNetwork() {
             let baseURl =  VBWeatherConstant.openWeatherMap.openWeatherMapURLs.openWeatherMapURL
             let endPointURL = baseURl + "?" + VBWeatherConstant.openWeatherMap.openWeatherMapParmeterKeys.openWeatherMapQueryByCityNameParameterKey + "=" + cityName + "&" + VBWeatherConstant.openWeatherMap.openWeatherMapParmeterKeys.openWeatherMapAppIdParameterKey + "=" + VBWeatherConstant.openWeatherMap.openWeatherMapKeys.openWeatherMapApiKey

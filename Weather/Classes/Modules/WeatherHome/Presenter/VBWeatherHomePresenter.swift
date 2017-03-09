@@ -49,7 +49,7 @@ class VBWeatherHomePresenter: NSObject, VBWeatherHomeInteractorOutput {
      - Parameter title: The alert title needs to be used
      - Parameter error: The error message needs to be displayed
      */
-    internal func inValidCityTextEntry (_ isValid: Bool, errorMsg: String!, cityName:String!) {
+    internal func isValidCityTextEntry (_ isValid: Bool, errorMsg: String!, cityName:String!) {
         if !isValid {
             output.hideActivityIndicator()
         }

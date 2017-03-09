@@ -28,9 +28,14 @@ final class VBWeatherWebServiceManager: NSObject {
             if error != nil{
                 completionHandler(nil, error)
             }
-            if let responseJSON = (try? JSONSerialization.jsonObject(with: data!, options: [])) as? [String:AnyObject]{
-               completionHandler(responseJSON as AnyObject?, nil)
+            
+            if let data = data {
+                if let responseJSON = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String:AnyObject]{
+                    completionHandler(responseJSON as AnyObject?, nil)
+                    return
+                }
             }
+            
             else {
                 completionHandler(nil, nil)
             }

@@ -20,7 +20,7 @@ class VBWeatherMap: NSObject {
 	public var weatherDescription: String?
     
     /// The sea-level air pressure in millibars.
-	public var pressure: String?
+	public var pressure: Float?
     
     /// Name of the icon suitable for the weather to display
     public var icon: String?
@@ -58,8 +58,13 @@ class VBWeatherMap: NSObject {
     // Name of the city
     public var city: String?
 	
+    // Name of the country
+    public var statusCode: Int?
+    
+    // Name of the city
+    public var errorMessage: String?
 
-    init?( windSpeed: Float, weatherDescription: String, pressure: String, icon: String, humidity: Float, sunrise: Date, sunset: Date, temperature: Float, temperatureMin: Float, temperatureMax: Float, visibility: Float, latitude: Float, longitude: Float, country: String, city: String) {
+    init?( windSpeed: Float?, weatherDescription: String?, pressure: Float?, icon: String?, humidity: Float?, sunrise: Date?, sunset: Date?, temperature: Float?, temperatureMin: Float?, temperatureMax: Float?, visibility: Float?, latitude: Float?, longitude: Float?, country: String?, city: String?, statusCode:Int?, errorMessage:String?) {
 
         self.windSpeed = windSpeed
         self.weatherDescription = weatherDescription
@@ -76,6 +81,7 @@ class VBWeatherMap: NSObject {
         self.longitude = longitude
         self.country = country
         self.city = city
-
+        self.statusCode = statusCode
+        self.errorMessage = errorMessage
 	}
 }

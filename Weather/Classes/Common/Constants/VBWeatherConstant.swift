@@ -20,7 +20,7 @@ struct VBWeatherConstant {
             static let openWeatherMapQueryByCityNameParameterKey = "q"
         }
         struct openWeatherMapURLs {
-            static let openWeatherMapURL = "api.openweathermap.org/data/2.5/weather"
+            static let openWeatherMapURL = "http://api.openweathermap.org/data/2.5/weather"
         }
     }
     
