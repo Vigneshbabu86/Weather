@@ -20,6 +20,7 @@ protocol VBWeatherHomeViewControllerOutput {
 let reuseIdentifierWeatherDescriptionCell = "WeatherDescriptionCell"
 let reuseIdentifierWeatherDetailCell = "WeatherDetailCell"
 
+/// Weather Enum to Manage the Order of Display
 enum WeatherCategory: String {
     case WeatherDescription = "0", Wind = "1", Pressure = "2", Humidity = "3", Sunrise = "4", Sunset = "5", GeoCoords = "6"
     
@@ -44,16 +45,20 @@ enum WeatherCategory: String {
     }
 }
 
-/// Interacts with presenter
+/// Interacts with presenter and handles the UI
 class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataSource, UITableViewDelegate, VBWeatherHomePresenterOutput, UISearchBarDelegate {
-    
-    var weatherTableDataInfo: [String:AnyObject] = [:]
-    
+   
     @IBOutlet weak var searchBar: UISearchBar?
     @IBOutlet weak var tableView: UITableView?
     
+    /// Manage Weather entries for display
+    var weatherTableDataInfo: [String:AnyObject] = [:]
+    
     // Configurator Input
     var output: VBWeatherHomeViewControllerOutput!
+    
+    /// Activity Indicator View
+    var activityIndicator: UIActivityIndicatorView?
     
     // MARK : View LifeCycle
     override func viewDidLoad() {
@@ -65,10 +70,17 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
         tableView?.delegate = self
         tableView?.dataSource = self
         
+        // set the title
         self.title = "Weather"
 
         // Reload the table
         self.tableView?.reloadData()
+        
+        
+        activityIndicator = UIActivityIndicatorView(frame:CGRect(x: 100, y: 100, width: 100, height: 100)) as UIActivityIndicatorView
+        self.activityIndicator?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.activityIndicator?.center = self.view.center;
+        self.view.addSubview(activityIndicator!);
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,6 +105,7 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
     // MARK: - Search Bar Delegates
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar?.resignFirstResponder()
+        self.startActivityIndicator()
         self.output.validateCity(searchBar.text ?? "")
         self.weatherTableDataInfo.removeAll()
         DispatchQueue.main.async { [weak self] in
@@ -161,43 +174,6 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
             return 68
             }
     }
-
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
     
     class func showAlert(_ title: String, message: String, presenter: UIViewController ,actions:() -> ([UIAlertAction])) {
         let alert: UIAlertController =
@@ -229,6 +205,15 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
         }
     }
     
+    func startActivityIndicator() {
+        self.activityIndicator?.startAnimating()
+    }
+}
+
+// MARK: VBWeatherHomePresenterOutput
+typealias WeatherPresenter = VBWeatherHomeViewController
+extension WeatherPresenter {
+    
     func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
         var i = 0
         return AnyIterator {
@@ -238,12 +223,7 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
             return next
         }
     }
-}
-
-// MARK: VBWeatherHomePresenterOutput
-typealias WeatherPresenter = VBWeatherHomeViewController
-extension WeatherPresenter {
-    //[WeatherDescription, Wind, Pressure, Humidity, Sunrise, Sunset, GeoCoords]
+    
     /**
      Handles the success status of the weather request completion
      
@@ -301,6 +281,7 @@ extension WeatherPresenter {
         
         
         self.tableView?.reloadData()
+        self.hideActivityIndicator()
     }
     
     /**
@@ -310,6 +291,7 @@ extension WeatherPresenter {
      - Parameter error: The error message needs to be displayed
      */
     internal func updateViewBasedOnWeatherRequestFailed(_ title: String? = "", errorMsg: String?) {
+        self.hideActivityIndicator()
         popupAlert(title, errorMessage: errorMsg)
     }
     
@@ -323,6 +305,6 @@ extension WeatherPresenter {
     }
     
     internal func hideActivityIndicator() {
-        
+        self.activityIndicator?.stopAnimating()
     }
 }
