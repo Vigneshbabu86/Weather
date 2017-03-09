@@ -1,7 +1,7 @@
 /**
  * @author Vignesh Babu
  *
- * @brief Weather Description Cell
+ * @brief Weather Details Cell for each entry
  *
  * @version 1.0
  *

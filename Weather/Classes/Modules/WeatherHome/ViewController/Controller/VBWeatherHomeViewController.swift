@@ -91,9 +91,14 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
         super.viewWillAppear(animated)
         if (isViewLoadingCompletedForPreviousSearchCompleted == false) {
             self.isViewLoadingCompletedForPreviousSearchCompleted = true
-            let lastSearchedCity = self.output.getLastSearchedCity()
-            if lastSearchedCity.characters.count > 0 {
-                self.output.validateCity(lastSearchedCity)
+            if VBWeatherUtilities.isConnectedToNetwork() {
+                let lastSearchedCity = self.output.getLastSearchedCity()
+                if lastSearchedCity.characters.count > 0 {
+                    self.output.validateCity(lastSearchedCity)
+                }
+            }
+            else {
+                self.popupAlert(VBWeatherConstant.Network.NetworkFailed, errorMessage: VBWeatherConstant.Network.NetworkFailedMessage)
             }
         }
     }
@@ -117,10 +122,15 @@ class VBWeatherHomeViewController: VBWeatherBaseViewController, UITableViewDataS
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar?.resignFirstResponder()
         self.startActivityIndicator()
-        self.output.validateCity(searchBar.text ?? "")
-        self.weatherTableDataInfo.removeAll()
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView?.reloadData()
+        if VBWeatherUtilities.isConnectedToNetwork() {
+            self.output.validateCity(searchBar.text ?? "")
+            self.weatherTableDataInfo.removeAll()
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView?.reloadData()
+            }
+        }
+        else {
+            self.popupAlert(VBWeatherConstant.Network.NetworkFailed, errorMessage: VBWeatherConstant.Network.NetworkFailedMessage)
         }
     }
     
