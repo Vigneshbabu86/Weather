@@ -63,6 +63,7 @@ class VBWeatherMap: NSObject {
     
     // Name of the city
     public var errorMessage: String?
+    
 
     init?( windSpeed: Float?, weatherDescription: String?, pressure: Float?, icon: String?, humidity: Float?, sunrise: Date?, sunset: Date?, temperature: Float?, temperatureMin: Float?, temperatureMax: Float?, visibility: Float?, latitude: Float?, longitude: Float?, country: String?, city: String?, statusCode:Int?, errorMessage:String?) {
 
@@ -84,4 +85,11 @@ class VBWeatherMap: NSObject {
         self.statusCode = statusCode
         self.errorMessage = errorMessage
 	}
+    
+    
+    override var description: String {
+        let selfDescription = "Wind Speed : \(self.windSpeed)" +
+                               "Weather Description \(weatherDescription)"
+        return selfDescription
+    }
 }

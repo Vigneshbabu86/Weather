@@ -16,7 +16,7 @@ class VBWeatherHomeParser: NSObject {
     func parserWeatherMapData(_ dataDictionary: NSDictionary) -> VBWeatherMap? {
 
         var windSpeed: Float?
-        let windInfo = dataDictionary[WeatherMap.Json.WIND_SPEED] as? NSDictionary
+        let windInfo = dataDictionary[WeatherMap.Json.WIND] as? NSDictionary
         if windInfo != nil {
             windSpeed = windInfo?[WeatherMap.Json.WIND_SPEED] as? Float
         }
@@ -27,22 +27,12 @@ class VBWeatherHomeParser: NSObject {
         
         let weatherArray = dataDictionary[WeatherMap.Json.WEATHER] as? NSArray
         if (weatherArray != nil) {
-            for weather in weatherArray! {
-                if weather is NSDictionary {
-                    weatherDescription = dataDictionary[WeatherMap.Json.WEATHER_DESCRIPTION] as? String
-                    icon = dataDictionary[WeatherMap.Json.WEATHER_ICON] as? String
+            for weatherInfo in weatherArray! {
+                if let weatherInfo = weatherInfo as? NSDictionary {
+                    weatherDescription = weatherInfo[WeatherMap.Json.WEATHER_DESCRIPTION] as? String
+                    icon = weatherInfo[WeatherMap.Json.WEATHER_ICON] as? String
                 }
             }
-        }
-        
-        var sunriseDate:Date? = nil
-        if let jsonSunriseTime = dataDictionary[WeatherMap.Json.WIND_SPEED] as? Double {
-            sunriseDate = Date(timeIntervalSince1970: jsonSunriseTime)
-        }
-        
-        var sunsetDate:Date? = nil
-        if let jsonSunriseTime = dataDictionary[WeatherMap.Json.WIND_SPEED] as? Double {
-            sunsetDate = Date(timeIntervalSince1970: jsonSunriseTime)
         }
         
         var pressure: Float? = nil
@@ -56,7 +46,7 @@ class VBWeatherHomeParser: NSObject {
             temperature = main?[WeatherMap.Json.MAIN_TEMP] as? Float
             temperatureMin = main?[WeatherMap.Json.MAIN_TEMP_MIN] as? Float
             temperatureMax = main?[WeatherMap.Json.MAIN_TEMP_MAX] as? Float
-            humidity = main?[WeatherMap.Json.WIND_SPEED] as? Float
+            humidity = main?[WeatherMap.Json.MAIN_HUMIDITY] as? Float
         }
         
         let visibility = dataDictionary[WeatherMap.Json.VISIBILITY] as? Float
@@ -70,9 +60,19 @@ class VBWeatherHomeParser: NSObject {
         }
         
         var country: String? = nil
+        var sunriseDate:Date? = nil
+        var sunsetDate:Date? = nil
         let system = dataDictionary[WeatherMap.Json.SYS] as? NSDictionary
         if system != nil {
             country = system?[WeatherMap.Json.SYS_COUNTRY] as? String
+            
+            if let jsonSunriseTime = system?[WeatherMap.Json.SYS_SUNRISE] as? Double {
+                sunriseDate = Date(timeIntervalSince1970: jsonSunriseTime)
+            }
+            
+            if let jsonSunriseTime = system?[WeatherMap.Json.SYS_SUNSET] as? Double {
+                sunsetDate = Date(timeIntervalSince1970: jsonSunriseTime)
+            }
         }
         
         let city = dataDictionary[WeatherMap.Json.NAME] as? String
